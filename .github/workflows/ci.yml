@@ -1,0 +1,24 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Phase 3: Checkout code from your GitHub repo
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Phase 3: Build step (Simulated for this web app)
+    - name: Build Web Application
+      run: echo "Starting the build process for devops-webapp..."
+
+    # Phase 3: Generate output logs for your report
+    - name: Generate Build Logs
+      run: |
+        echo "Build successfully completed at $(date)"
+        echo "CI Pipeline demonstrates Model 1 concepts."
