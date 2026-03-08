@@ -9,16 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Phase 3: Checkout code from your GitHub repo
+    # Phase 3: Checkout and Build
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # Phase 3: Build step (Simulated for this web app)
-    - name: Build Web Application
-      run: echo "Starting the build process for devops-webapp..."
+    - name: Build Project
+      run: echo "Building the project..."
 
-    # Phase 3: Generate output logs for your report
-    - name: Generate Build Logs
-      run: |
-        echo "Build successfully completed at $(date)"
-        echo "CI Pipeline demonstrates Model 1 concepts."
+    - name: Run Tests
+      run: echo "Running tests..."
+
+    # Phase 4: ChatOps Notification to devops-sev3745
+    - name: Send Slack Notification
+      if: always()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_TITLE: "Build Status for Gautam's App"
+        SLACK_MESSAGE: "The CI Pipeline has finished running. Status: ${{ job.status }}"
+        SLACK_COLOR: ${{ job.status }}
